@@ -1,4 +1,4 @@
-export function validateApiKey(req, res, next) {
+function validateApiKey(req, res, next) {
   const key = req.get("API_KEY");
   const invalidToken = key !== process.env.API_KEY;
   if (invalidToken) {
@@ -6,3 +6,7 @@ export function validateApiKey(req, res, next) {
   }
   next();
 }
+
+module.exports = {
+  validateApiKey,
+};

@@ -1,9 +1,15 @@
 const { errorParser } = require("../utils/errorParser");
 
-const successResponse = ({ res, message = null, status = 200 }) => {
+const successResponse = ({
+  res,
+  message = null,
+  status = 200,
+  data = null,
+}) => {
   return res.status(status).json({
     message,
     status: "okay",
+    data,
   });
 };
 
