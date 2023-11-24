@@ -21,7 +21,6 @@ const PORT = process.env.PORT || 5000;
 
 addDefaultMiddlewares(app);
 
-app.use(validateApiKey);
 // Auth routes
 app.use(apiRoutePrefixer("/auth/signup"), signUpRouter);
 app.use(apiRoutePrefixer("/auth/signin"), signInRouter);
