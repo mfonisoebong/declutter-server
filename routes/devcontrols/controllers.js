@@ -8,7 +8,7 @@ const execAsync = promisify(exec);
 
 const migrate = async (req, res) => {
   try {
-    const { stdout, stderr } = await execAsync("npx sequelize-cli db:migrate");
+    const { stdout, stderr } = await execAsync("sequelize-cli db:migrate");
     return successResponse({
       res,
       message: "Migrated successfully",
@@ -23,7 +23,7 @@ const migrate = async (req, res) => {
 
 const seed = async (req, res) => {
   try {
-    const { stdout, stderr } = await execAsync("npx sequelize-cli db:seed:all");
+    const { stdout, stderr } = await execAsync("sequelize-cli db:seed:all");
     return successResponse({
       res,
       message: "Migrated successfully",
@@ -39,7 +39,7 @@ const seed = async (req, res) => {
 const drop = async (req, res) => {
   try {
     const { stdout, stderr } = await execAsync(
-      "npx sequelize-cli db:migrate:undo:all",
+      "sequelize-cli db:migrate:undo:all",
     );
     return successResponse({
       res,
