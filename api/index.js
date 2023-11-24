@@ -12,6 +12,7 @@ const { signInRouter } = require("../routes/auth/signin");
 const { googleCallbackRouter } = require("../routes/auth/google-callback");
 const { userRouter } = require("../routes/auth/user");
 const { signoutRouter } = require("../routes/auth/signout");
+const { devControlsRouter } = require("../routes/devcontrols");
 const { validateApiKey } = require("../common/middlewares/validateApiKey");
 
 const app = express();
@@ -27,6 +28,10 @@ app.use(apiRoutePrefixer("/auth/signin"), signInRouter);
 app.use(apiRoutePrefixer("/auth/google/callback"), googleCallbackRouter);
 app.use(apiRoutePrefixer("/auth/user"), userRouter);
 app.use(apiRoutePrefixer("/auth/signout"), signoutRouter);
+
+// Dev routes
+
+app.use(apiRoutePrefixer("/dev"), devControlsRouter);
 
 app.listen(PORT, () => {
   console.log("Server running");
