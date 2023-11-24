@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon api/index.js",
     "start": "node api/index.js",
-    "postinstall": "sequelize-cli db:migrate"
+    "postinstall": "NODE_ENV=production sequelize-cli db:migrate"
   },
   "keywords": [],
   "author": "",
