@@ -2,18 +2,18 @@ const express = require("express");
 const dotenv = require("dotenv");
 const {
     addDefaultMiddlewares,
-} = require("./common/utils/addDefaultMiddlewares.js");
-const {apiRoutePrefixer} = require("./common/utils/apiRoutePrefixer.js");
+} = require("../common/utils/addDefaultMiddlewares.js");
+const {apiRoutePrefixer} = require("../common/utils/apiRoutePrefixer.js");
 dotenv.config();
-require("./passport-config");
+require("../passport-config");
 
-const {signUpRouter} = require("./routes/auth/signup");
-const {signInRouter} = require("./routes/auth/signin");
-const {googleCallbackRouter} = require("./routes/auth/google-callback");
-const {userRouter} = require("./routes/auth/user");
-const {signoutRouter} = require("./routes/auth/signout");
-const {devControlsRouter} = require("./routes/devcontrols");
-const {connectDB} = require("./db");
+const {signUpRouter} = require("../routes/auth/signup");
+const {signInRouter} = require("../routes/auth/signin");
+const {googleCallbackRouter} = require("../routes/auth/google-callback");
+const {userRouter} = require("../routes/auth/user");
+const {signoutRouter} = require("../routes/auth/signout");
+const {devControlsRouter} = require("../routes/devcontrols");
+const {connectDB} = require("../db");
 
 
 const app = express();

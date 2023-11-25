@@ -16,16 +16,16 @@ const passportAuthenticate = passport.authenticate("google", {
 
 const userLocalSignup = async (req, res, next) => {
     try {
-        const {password, ...restData} = req.body;
-        const hash = await argon.hash(password);
+        const {password, confirmPassword, ...restData} = req.body;
 
         const user = new User({
             ...restData,
-            hash,
+            hash: password,
         })
         await user.save()
 
         const token = serializeUser(user);
+        user.hash = undefined
         return res
             .cookie("jwt_token", token, {
                 maxAge: 60000 * 60 * 24,

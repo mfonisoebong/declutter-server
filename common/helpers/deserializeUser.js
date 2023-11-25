@@ -11,7 +11,10 @@ const deserializeUser = async (req) => {
     const {_id} = jwt.decode(token);
 
     const user = await User.findById(_id)
-    delete user.hash;
+
+    if (!user) return null
+
+    user.hash = undefined;
 
     return user;
 };

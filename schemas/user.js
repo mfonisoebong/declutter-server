@@ -50,7 +50,10 @@ const UserSchema = new mongoose.Schema({
         default: null
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    toJSON: {
+        virtuals: true,
+    }
 })
 
 UserSchema.virtual('fullName').get(function () {
@@ -68,6 +71,12 @@ UserSchema.method({
 })
 
 UserSchema.post('validate', async function (doc, next) {
+
+    if (!doc.hash) {
+        next()
+        return
+    }
+
     try {
         const hash = await argon.hash(doc.hash)
         doc.hash = hash

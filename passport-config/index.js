@@ -48,6 +48,7 @@ passport.use(
             authStrategy: "local",
         });
 
+
         if (!user) {
             return done(new Error("User not found"), null);
         }
@@ -57,6 +58,8 @@ passport.use(
         if (!paswordVerified) {
             return done(new Error("Invalid credentials"), null);
         }
+
+        user.hash = undefined
 
         return done(null, user);
     })

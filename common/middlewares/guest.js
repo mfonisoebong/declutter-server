@@ -1,18 +1,20 @@
 const {deserializeUser} = require("../helpers/deserializeUser");
 const {failedResponse} = require("../helpers/httpResponse");
-const authenticated = async (req, res, next) => {
+const guest = async (req, res, next) => {
     try {
-        const user = await deserializeUser(req);
-        if (user) {
-            user.hash = undefined;
-            req.user = user;
 
+        if (!req.cookies.jwt_token) {
             return next();
         }
-        return failedResponse({
-            res,
-            status: 401,
-        });
+
+        const user = await deserializeUser(req);
+        if (user) {
+            return failedResponse({
+                res,
+                status: 403,
+            });
+        }
+        return next();
     } catch (err) {
         return failedResponse({
             res,
@@ -23,5 +25,5 @@ const authenticated = async (req, res, next) => {
 };
 
 module.exports = {
-    authenticated,
+    guest,
 };

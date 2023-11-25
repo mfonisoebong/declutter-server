@@ -1,25 +1,27 @@
-const { Router } = require("express");
+const {Router} = require("express");
 const {
-  googleSignup,
-  passportAuthenticate,
-  userLocalSignup,
+    googleSignup,
+    passportAuthenticate,
+    userLocalSignup,
 } = require("./controllers");
-const { zodValidator } = require("../../../common/middlewares/zodValidator");
-const { SignUpSchema } = require("./schema");
+const {zodValidator} = require("../../../common/middlewares/zodValidator");
+const {SignUpSchema} = require("./schema");
 const {
-  validateApiKey,
+    validateApiKey,
 } = require("../../../common/middlewares/validateApiKey");
+const {guest} = require("../../../common/middlewares/guest");
 
 const signUpRouter = Router();
 
 signUpRouter.get("/google", googleSignup, passportAuthenticate);
 signUpRouter.post(
-  "/local/user",
-  validateApiKey,
-  zodValidator(SignUpSchema),
-  userLocalSignup,
+    "/local/user",
+    validateApiKey,
+    guest,
+    zodValidator(SignUpSchema),
+    userLocalSignup,
 );
 
 module.exports = {
-  signUpRouter,
+    signUpRouter,
 };

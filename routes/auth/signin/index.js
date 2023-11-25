@@ -1,25 +1,27 @@
-const { Router } = require("express");
+const {Router} = require("express");
 const {
-  googleSignin,
-  passportAuthenticate,
-  localSignin,
+    googleSignin,
+    passportAuthenticate,
+    localSignin,
 } = require("./controllers");
-const { zodValidator } = require("../../../common/middlewares/zodValidator");
-const { SignInSchema } = require("./schema");
+const {zodValidator} = require("../../../common/middlewares/zodValidator");
+const {SignInSchema} = require("./schema");
 const {
-  validateApiKey,
+    validateApiKey,
 } = require("../../../common/middlewares/validateApiKey");
+const {guest} = require("../../../common/middlewares/guest");
 
 const signInRouter = Router();
 
-signInRouter.get("/google", googleSignin, passportAuthenticate);
+signInRouter.get("/google", guest, googleSignin, passportAuthenticate);
 signInRouter.post(
-  "/local",
-  validateApiKey,
-  zodValidator(SignInSchema),
-  localSignin,
+    "/local",
+    validateApiKey,
+    guest,
+    zodValidator(SignInSchema),
+    localSignin,
 );
 
 module.exports = {
-  signInRouter,
+    signInRouter,
 };
