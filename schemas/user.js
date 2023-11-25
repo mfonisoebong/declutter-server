@@ -1,17 +1,8 @@
 const mongoose = require('mongoose');
 const {EMAIL_REGEX} = require('../common/constants/regex')
 const argon = require('argon2')
+const {PhoneSchema} = require("./phone");
 
-const PhoneSchema = new mongoose.Schema({
-    dialCode: {
-        type: String,
-        required: true
-    },
-    number: {
-        type: String,
-        required: true
-    }
-})
 
 const UserSchema = new mongoose.Schema({
     firstName: {

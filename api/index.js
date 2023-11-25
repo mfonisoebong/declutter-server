@@ -14,6 +14,7 @@ const {userRouter} = require("../routes/auth/user");
 const {signoutRouter} = require("../routes/auth/signout");
 const {devControlsRouter} = require("../routes/devcontrols");
 const {connectDB} = require("../db");
+const {contactUsRouter} = require("../routes/contact-us");
 
 
 const app = express();
@@ -33,6 +34,7 @@ app.use(apiRoutePrefixer("/auth/google/callback"), googleCallbackRouter);
 app.use(apiRoutePrefixer("/auth/user"), userRouter);
 app.use(apiRoutePrefixer("/auth/signout"), signoutRouter);
 
+app.use(apiRoutePrefixer("/contact-us"), contactUsRouter);
 // Dev routes
 
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
