@@ -1,20 +1,20 @@
 const jwt = require("jsonwebtoken");
-const { User } = require("../../models");
+const {User} = require("../../schemas/user");
 
 const deserializeUser = async (req) => {
-  const token = req.cookies.jwt_token;
+    const token = req.cookies.jwt_token;
 
-  if (!token) {
-    throw new Error("No token provided");
-  }
+    if (!token) {
+        throw new Error("No token provided");
+    }
 
-  const { id } = jwt.decode(token);
+    const {_id} = jwt.decode(token);
 
-  const user = await User.findByPk(id);
-  delete user.hash;
+    const user = await User.findById(_id)
+    delete user.hash;
 
-  return user;
+    return user;
 };
 module.exports = {
-  deserializeUser,
+    deserializeUser,
 };
