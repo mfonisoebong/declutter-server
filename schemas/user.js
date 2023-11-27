@@ -39,6 +39,10 @@ const UserSchema = new mongoose.Schema({
     phone: {
         type: PhoneSchema,
         default: null
+    },
+    verifiedAt: {
+        type: Date,
+        default: null
     }
 }, {
     timestamps: true,

@@ -15,6 +15,7 @@ const {signoutRouter} = require("../routes/auth/signout");
 const {devControlsRouter} = require("../routes/devcontrols");
 const {connectDB} = require("../db");
 const {contactUsRouter} = require("../routes/contact-us");
+const {deliveryAddressRouter} = require("../routes/delivery-address");
 
 
 const app = express();
@@ -32,11 +33,16 @@ app.use(apiRoutePrefixer("/auth/signup"), signUpRouter);
 app.use(apiRoutePrefixer("/auth/signin"), signInRouter);
 app.use(apiRoutePrefixer("/auth/google/callback"), googleCallbackRouter);
 app.use(apiRoutePrefixer("/auth/user"), userRouter);
+
+
+app.use(apiRoutePrefixer("/delivery-address"), deliveryAddressRouter);
+
+
 app.use(apiRoutePrefixer("/auth/signout"), signoutRouter);
 
 app.use(apiRoutePrefixer("/contact-us"), contactUsRouter);
-// Dev routes
 
+// Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
 
 app.listen(PORT, () => {
