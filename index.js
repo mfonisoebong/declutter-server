@@ -19,6 +19,7 @@ const {connectDB} = require("./db/index.js");
 const {contactUsRouter} = require("./routes/contact-us/index.js");
 const {deliveryAddressRouter} = require("./routes/delivery-address/index.js");
 const {testRouter} = require('./routes/test')
+const {verifyRoute} = require('./routes/auth/verify')
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use(apiRoutePrefixer("/auth/signup"), signUpRouter);
 app.use(apiRoutePrefixer("/auth/signin"), signInRouter);
 app.use(apiRoutePrefixer("/auth/google/callback"), googleCallbackRouter);
 app.use(apiRoutePrefixer("/auth/user"), userRouter);
+app.use(apiRoutePrefixer("/auth/verify"), verifyRoute);
 
 app.use(apiRoutePrefixer("/delivery-address"), deliveryAddressRouter);
 
