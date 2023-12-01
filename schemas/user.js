@@ -57,12 +57,22 @@ const UserSchema = new mongoose.Schema(
         toJSON: {
             virtuals: true,
         },
+        toObject: {
+            virtuals: true,
+        }
     }
 );
 
 UserSchema.virtual("fullName").get(function () {
-    return `${this.firstName} ${this.lastName}`;
+    return this.buisnessName ?? `${this.firstName} ${this.lastName}`;
 });
+
+UserSchema.virtual('products', {
+    ref: 'Product',
+    localField: '_id',
+    foreignField: 'vendor'
+})
+
 
 UserSchema.method({
     verifyHash: async function (hash, password) {

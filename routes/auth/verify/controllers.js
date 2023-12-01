@@ -28,7 +28,7 @@ const verifyUser = async (req, res) => {
         if (!verification) {
             return res.status(403).send(`<h1>Verification link has expired</h1>`)
         }
-        const user = await User.findById(verification.userId)
+        const user = await User.findById(verification.user)
 
         if (user.verifiedAt) {
             return failedResponse({

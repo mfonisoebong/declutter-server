@@ -1,7 +1,7 @@
 const {transporter} = require("../helpers/mailTransporter");
 const {Verification} = require("../../schemas/verification");
 const sendVerification = async (user) => {
-    const verification = new Verification({userId: user._id});
+    const verification = new Verification({user: user._id});
     await verification.save();
     const verifyLink = `${process.env.BASE_URL}/api/v1/auth/verify/${verification._id}`;
     await transporter.sendMail({

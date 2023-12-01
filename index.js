@@ -20,6 +20,9 @@ const {contactUsRouter} = require("./routes/contact-us/index.js");
 const {deliveryAddressRouter} = require("./routes/delivery-address/index.js");
 const {testRouter} = require('./routes/test')
 const {verifyRoute} = require('./routes/auth/verify')
+const {productVendorRouter} = require("./routes/products/vendor");
+const {productUserRouter} = require("./routes/products/user");
+const {reviewUserRouter} = require('./routes/product-reviews/user')
 
 const app = express();
 
@@ -43,6 +46,13 @@ app.use(apiRoutePrefixer("/delivery-address"), deliveryAddressRouter);
 app.use(apiRoutePrefixer("/auth/signout"), signoutRouter);
 
 app.use(apiRoutePrefixer("/contact-us"), contactUsRouter);
+
+// Product routes
+app.use(apiRoutePrefixer("/products/vendor"), productVendorRouter);
+app.use(apiRoutePrefixer("/products/user"), productUserRouter);
+
+// Product review routes
+app.use(apiRoutePrefixer("/product-reviews/user"), reviewUserRouter);
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);

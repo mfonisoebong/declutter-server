@@ -1,4 +1,4 @@
-const {DeliveryAddress} = require("../../schemas/delivery-address");
+const {DeliveryAddress} = require("../../schemas/deliveryAddress");
 const {successResponse, failedResponse} = require("../../common/helpers/httpResponse");
 const addOrUpdateDeliveryAddress = async (req, res) => {
     try {
@@ -13,7 +13,7 @@ const addOrUpdateDeliveryAddress = async (req, res) => {
 
 const getDeliveryAddress = async (req, res) => {
     try {
-        const deliveryAddress = await DeliveryAddress.findOne({userId: req.user._id})
+        const deliveryAddress = await DeliveryAddress.findOne({user: req.user._id})
 
         return successResponse({res, data: deliveryAddress})
 

@@ -38,12 +38,12 @@ const DeliveryAddressSchema = new mongoose.Schema({
     },
     address: AddressSchema,
     phone: PhoneSchema,
-    userId: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
         unique: true,
-        
+
     }
 })
 
