@@ -50,7 +50,7 @@ const DeliveryAddressSchema = new mongoose.Schema({
 
 DeliveryAddressSchema.statics.createOrUpdate = async function (userId, data) {
     try {
-        const deliveryAddress = await this.findOne({userId})
+        const deliveryAddress = await this.findOne({user: userId})
         if (deliveryAddress) {
             const updatedDeliveryAddress = await this.findByIdAndUpdate(deliveryAddress._id, data, {new: true})
             await updatedDeliveryAddress.save()

@@ -23,6 +23,7 @@ const {verifyRoute} = require('./routes/auth/verify')
 const {productVendorRouter} = require("./routes/products/vendor");
 const {productUserRouter} = require("./routes/products/user");
 const {reviewUserRouter} = require('./routes/product-reviews/user')
+const {cartRouter} = require("./routes/cart");
 
 const app = express();
 
@@ -53,6 +54,9 @@ app.use(apiRoutePrefixer("/products/user"), productUserRouter);
 
 // Product review routes
 app.use(apiRoutePrefixer("/product-reviews/user"), reviewUserRouter);
+
+// Cart routes
+app.use(apiRoutePrefixer("/cart"), cartRouter);
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
