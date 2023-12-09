@@ -24,6 +24,7 @@ const {productVendorRouter} = require("./routes/products/vendor");
 const {productUserRouter} = require("./routes/products/user");
 const {reviewUserRouter} = require('./routes/product-reviews/user')
 const {cartRouter} = require("./routes/cart");
+const {categoriesRouter} = require("./routes/categories");
 
 const app = express();
 
@@ -57,6 +58,8 @@ app.use(apiRoutePrefixer("/product-reviews/user"), reviewUserRouter);
 
 // Cart routes
 app.use(apiRoutePrefixer("/cart"), cartRouter);
+
+app.use(apiRoutePrefixer("/categories"), categoriesRouter);
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);

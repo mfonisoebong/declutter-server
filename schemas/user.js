@@ -59,7 +59,7 @@ const UserSchema = new mongoose.Schema(
         },
         toObject: {
             virtuals: true,
-        }
+        },
     }
 );
 
@@ -67,12 +67,29 @@ UserSchema.virtual("fullName").get(function () {
     return this.buisnessName ?? `${this.firstName} ${this.lastName}`;
 });
 
-UserSchema.virtual('products', {
-    ref: 'Product',
-    localField: '_id',
-    foreignField: 'vendor'
-})
+UserSchema.virtual("products", {
+    ref: "Product",
+    localField: "_id",
+    foreignField: "vendor",
+});
 
+UserSchema.virtual("invoices", {
+    ref: "Invoice",
+    localField: "_id",
+    foreignField: "user",
+});
+
+UserSchema.virtual("orders", {
+    ref: "Order",
+    localField: "_id",
+    foreignField: "user",
+});
+
+UserSchema.virtual("ordersPlaced", {
+    ref: "Order",
+    localField: "_id",
+    foreignField: "vendor",
+});
 
 UserSchema.method({
     verifyHash: async function (hash, password) {
@@ -99,22 +116,21 @@ UserSchema.post("validate", async function (doc, next) {
     }
 });
 
-UserSchema.pre('save', function (next) {
-    this.docIsNew = this.isNew
-    next()
-})
+UserSchema.pre("save", function (next) {
+    this.docIsNew = this.isNew;
+    next();
+});
 
-UserSchema.post('save', async function (doc) {
+UserSchema.post("save", async function (doc) {
     if (!this.docIsNew) {
-        return
+        return;
     }
     try {
-        await sendVerification(doc)
+        await sendVerification(doc);
     } catch (err) {
-        console.log(err)
+        console.log(err);
     }
-
-})
+});
 
 const User = mongoose.model("User", UserSchema);
 
