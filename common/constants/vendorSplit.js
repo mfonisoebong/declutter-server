@@ -1,4 +1,4 @@
-const VENDOR_SPLIT = 10;
+const VENDOR_SPLIT = 15;
 
 module.exports = {
     VENDOR_SPLIT
