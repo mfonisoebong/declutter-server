@@ -5,8 +5,8 @@ const {validateApiKey} = require("../../common/middlewares/validateApiKey");
 const {createContactUs} = require("./controller");
 const contactUsRouter = Router()
 
-
-contactUsRouter.post('/', validateApiKey, zodValidator(ContactUsSchema), createContactUs)
+contactUsRouter.use(validateApiKey)
+contactUsRouter.post('/', zodValidator(ContactUsSchema), createContactUs)
 
 module.exports = {
     contactUsRouter

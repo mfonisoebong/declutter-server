@@ -1,46 +1,42 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
-const OrderSchema = new mongoose.Schema({
+const OrderSchema = new mongoose.Schema(
+  {
     user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     vendor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
     invoice: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Invoice'
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Invoice",
     },
     status: {
-        type: String,
-        enum: ['pending', 'delivered'],
-        default: 'pending'
+      type: String,
+      enum: ["pending", "delivered"],
+      default: "pending",
     },
     deliveredAt: {
-        type: Date,
-        default: null
-    }
-}, {
+      type: Date,
+      default: null,
+    },
+  },
+  {
     timestamps: true,
     toJSON: {
-        virtuals: true
+      virtuals: true,
     },
     toObject: {
-        virtuals: true
-    }
-})
+      virtuals: true,
+    },
+  }
+);
 
-OrderSchema.virtual('invoice', {
-    foreignField: '_id',
-    localField: 'invoice',
-    ref: 'Invoice',
-})
-
-
-const Order = mongoose.model('Order', OrderSchema)
+const Order = mongoose.model("Order", OrderSchema);
 
 module.exports = {
-    Order
-}
+  Order,
+};

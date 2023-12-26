@@ -7,8 +7,10 @@ const {zodValidator} = require("../../common/middlewares/zodValidator");
 const {DeliveryAddressSchema} = require("./schema");
 const deliveryAddressRouter = Router()
 
-deliveryAddressRouter.post('/', validateApiKey, authenticated, verified, zodValidator(DeliveryAddressSchema), addOrUpdateDeliveryAddress)
-deliveryAddressRouter.get('/', validateApiKey, authenticated, verified, getDeliveryAddress)
+deliveryAddressRouter.use(validateApiKey, authenticated, verified)
+
+deliveryAddressRouter.post('/', zodValidator(DeliveryAddressSchema), addOrUpdateDeliveryAddress)
+deliveryAddressRouter.get('/', getDeliveryAddress)
 
 
 module.exports = {deliveryAddressRouter}

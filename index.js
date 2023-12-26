@@ -25,6 +25,7 @@ const {productUserRouter} = require("./routes/products/user");
 const {reviewUserRouter} = require('./routes/product-reviews/user')
 const {cartRouter} = require("./routes/cart");
 const {categoriesRouter} = require("./routes/categories");
+const {paymentsRouter} = require('./routes/payments')
 
 const app = express();
 
@@ -66,6 +67,10 @@ app.use(apiRoutePrefixer("/dev"), devControlsRouter);
 
 // Test routes
 app.use(apiRoutePrefixer("/test"), testRouter);
+
+// Payments routes
+
+app.use(apiRoutePrefixer('/payments'), paymentsRouter)
 
 app.listen(PORT, () => {
     console.log("Server running");

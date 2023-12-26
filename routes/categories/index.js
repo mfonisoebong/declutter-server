@@ -6,9 +6,11 @@ const {verified} = require("../../common/middlewares/verified");
 const {hasRole} = require("../../common/middlewares/hasRole");
 const categoriesRouter = Router()
 
-categoriesRouter.get('/', validateApiKey, getCategories)
-categoriesRouter.post('/', validateApiKey, authenticated, verified, hasRole('admin'), createCategory)
-categoriesRouter.delete('/:id', validateApiKey, authenticated, verified, hasRole('admin'), deleteCategory)
+categoriesRouter.use(validateApiKey)
+
+categoriesRouter.get('/', getCategories)
+categoriesRouter.post('/', authenticated, verified, hasRole('admin'), createCategory)
+categoriesRouter.delete('/:id', authenticated, verified, hasRole('admin'), deleteCategory)
 
 
 module.exports = {
