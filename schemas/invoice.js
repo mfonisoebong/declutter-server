@@ -9,6 +9,11 @@ const InvoiceSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       ref: "User",
     },
+    status: {
+      type: String,
+      default: "pending",
+      enum: ["pending", "paid", "cancelled", "refunded"],
+    },
   },
   {
     timestamps: true,
@@ -18,7 +23,7 @@ const InvoiceSchema = new mongoose.Schema(
     toObject: {
       virtuals: true,
     },
-  }
+  },
 );
 
 const Invoice = mongoose.model("Invoice", InvoiceSchema);
