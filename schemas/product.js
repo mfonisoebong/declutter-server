@@ -39,8 +39,9 @@ const ProductSchema = new mongoose.Schema(
       type: [VariantSchema],
       required: true,
     },
-    categories: {
-      type: [String],
+    category: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
       required: true,
     },
     vendor: {
@@ -61,7 +62,7 @@ const ProductSchema = new mongoose.Schema(
     toJSON: {
       virtuals: true,
     },
-  }
+  },
 );
 
 ProductSchema.virtual("reviews", {

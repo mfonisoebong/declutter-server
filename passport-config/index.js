@@ -37,8 +37,8 @@ passport.use(
       }
 
       return done(null, user);
-    }
-  )
+    },
+  ),
 );
 
 passport.use(
@@ -61,7 +61,7 @@ passport.use(
     user.hash = undefined;
 
     return done(null, user);
-  })
+  }),
 );
 
 passport.serializeUser((user, cb) => {

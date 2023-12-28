@@ -133,6 +133,13 @@ const checkout = async (req, res) => {
       "product",
       "name variants price",
     );
+
+    if (cartItems.length === 0) {
+      return failedResponse({
+        res,
+        err: "Cart is empty",
+      });
+    }
     const totalPrice = getTotalPrice(cartItems);
     const paystackAmount = totalPrice * RATE;
 
