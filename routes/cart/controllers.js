@@ -4,9 +4,6 @@ const {
   successResponse,
 } = require("../../common/helpers/httpResponse");
 const { Invoice } = require("../../schemas/invoice");
-const { PaystackAxios } = require("../../common/helpers/axiosInstances");
-
-const RATE = 100;
 
 const getTotalPrice = (cartItems) => {
   const prices = cartItems.map((item) => item.product.price * item.quantity);
@@ -141,7 +138,6 @@ const checkout = async (req, res) => {
       });
     }
     const totalPrice = getTotalPrice(cartItems);
-    const paystackAmount = totalPrice * RATE;
 
     const invoice = new Invoice({
       cartItems,
@@ -149,27 +145,7 @@ const checkout = async (req, res) => {
     });
 
     await invoice.save();
-
-    const paymentData = {
-      email: req.user.email,
-      amount: paystackAmount,
-      reference: invoice._id,
-      callback_url: `${process.env.BASE_URL}/api/v1/payments/verify/${invoice._id}`,
-    };
-
-    const response = await PaystackAxios({
-      url: "/transaction/initialize",
-      method: "POST",
-      data: paymentData,
-    }).then((res) => res.data.data);
-    await CartItem.deleteMany({ user: req.user._id });
-
-    return successResponse({
-      res,
-      data: response,
-    });
   } catch (err) {
-    console.log(err);
     return failedResponse({
       res,
       err,
