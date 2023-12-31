@@ -2,6 +2,7 @@ const { Router } = require("express");
 const { validateApiKey } = require("../../common/middlewares/validateApiKey");
 const { authenticated } = require("../../common/middlewares/authenticated");
 const { verified } = require("../../common/middlewares/verified");
+const { hasVendorRole } = require("../../common/middlewares/hasRole");
 const {
   createIndividualSubAccount,
   deleteSubAccount,
@@ -47,12 +48,14 @@ subAccountsRouter.use(validateApiKey, authenticated, verified);
 
 subAccountsRouter.post(
   "/individual",
+  hasVendorRole("individual"),
   zodValidator(CreateIndividualAccountSchema),
   createIndividualSubAccount
 );
 
 subAccountsRouter.post(
   "/individual/upload-documents",
+  hasVendorRole("individual"),
   upload,
   uploadIndividualDocuments
 );
