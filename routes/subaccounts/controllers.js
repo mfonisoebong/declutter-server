@@ -120,7 +120,7 @@ const uploadIndividualDocuments = async (req, res) => {
     const frontUpload = await Stripe.files.create({
       file: {
         data: front,
-        name: "file.jpg",
+        name: front.originalname,
         type: "application.octet-stream",
       },
       purpose: "identity_document",
@@ -128,7 +128,7 @@ const uploadIndividualDocuments = async (req, res) => {
     const backUpload = await Stripe.files.create({
       file: {
         data: back,
-        name: "file.jpg",
+        name: back.originalname,
         type: "application.octet-stream",
       },
       purpose: "identity_document",
