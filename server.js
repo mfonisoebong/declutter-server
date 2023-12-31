@@ -28,6 +28,7 @@ const { categoriesRouter } = require("./routes/categories");
 const { paymentsRouter } = require("./routes/payments");
 const { webhooksRouter } = require("./routes/webhooks");
 const { homeRouter } = require("./routes/home");
+const { subAccountsRouter } = require("./routes/subaccounts");
 
 const app = express();
 
@@ -74,6 +75,8 @@ app.use(apiRoutePrefixer("/test"), testRouter);
 
 // Payments routes
 app.use(apiRoutePrefixer("/payments"), paymentsRouter);
+
+app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 
 app.use(apiRoutePrefixer("/webhooks"), webhooksRouter);
 

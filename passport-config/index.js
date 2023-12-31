@@ -1,8 +1,8 @@
 const passport = require("passport");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth2");
 const { Strategy: LocalStrategy } = require("passport-local");
-const argon = require("argon2");
 const { User } = require("../schemas/user");
+const bycrpt = require("bcryptjs");
 
 passport.use(
   new GoogleStrategy(
@@ -37,8 +37,8 @@ passport.use(
       }
 
       return done(null, user);
-    },
-  ),
+    }
+  )
 );
 
 passport.use(
@@ -52,7 +52,7 @@ passport.use(
       return done(new Error("User not found"), null);
     }
 
-    const paswordVerified = await user.verifyHash(user.hash, password);
+    const paswordVerified = bycrpt.compareSync(user.hash, password);
 
     if (!paswordVerified) {
       return done(new Error("Invalid credentials"), null);
@@ -61,7 +61,7 @@ passport.use(
     user.hash = undefined;
 
     return done(null, user);
-  }),
+  })
 );
 
 passport.serializeUser((user, cb) => {

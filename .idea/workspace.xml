@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2638e132-0d03-49aa-b422-7b5ad0cc343a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/common/helpers/stripe.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/subaccounts/controllers.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/subaccounts/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/routes/subaccounts/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/declutter-server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/declutter-server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/prettier.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/passport-config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/passport-config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth/signup/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth/signup/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth/signup/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth/signup/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/payments/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/payments/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/payments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/payments/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/schemas/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/user.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2aHx2OX5NCigtQfWeqJEFD6QGGr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "pnpm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2638e132-0d03-49aa-b422-7b5ad0cc343a" name="Changes" comment="" />
+      <created>1703989100496</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703989100496</updated>
+      <workItem from="1703989105864" duration="53000" />
+      <workItem from="1703989174313" duration="306000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

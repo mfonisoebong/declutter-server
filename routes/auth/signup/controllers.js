@@ -1,5 +1,4 @@
 const passport = require("passport");
-const argon = require("argon2");
 const { User } = require("../../../schemas/user");
 const { failedResponse } = require("../../../common/helpers/httpResponse");
 const { serializeUser } = require("../../../common/helpers/serializeUser");

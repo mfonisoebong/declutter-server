@@ -1,11 +1,8 @@
 const mongoose = require("mongoose");
 const { EMAIL_REGEX } = require("../common/constants/regex");
-const argon = require("argon2");
 const { PhoneSchema } = require("./phone");
-const { Verification } = require("./verification");
-const { transporter } = require("../common/helpers/mailTransporter");
 const { sendVerification } = require("../common/utils/sendVerification");
-
+const bycrpt = require("bcryptjs");
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
@@ -15,6 +12,10 @@ const UserSchema = new mongoose.Schema(
     lastName: {
       type: String,
       required: true,
+    },
+    address: {
+      type: String,
+      default: null,
     },
     avatar: {
       type: String,
@@ -34,6 +35,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    buisnessType: {
+      type: String,
+      enum: ["individual", "company", null],
+      default: null,
+    },
     email: {
       type: String,
       required: true,
@@ -42,6 +48,10 @@ const UserSchema = new mongoose.Schema(
         validator: (email) => EMAIL_REGEX.test(email),
         message: "Invalid email address.",
       },
+    },
+    stripeAccountId: {
+      type: String,
+      default: null,
     },
     hash: {
       type: String,
@@ -64,7 +74,7 @@ const UserSchema = new mongoose.Schema(
     toObject: {
       virtuals: true,
     },
-  },
+  }
 );
 
 UserSchema.virtual("fullName").get(function () {
@@ -107,16 +117,6 @@ UserSchema.virtual("bankAccounts", {
   foreignField: "vendor",
 });
 
-UserSchema.method({
-  verifyHash: async function (hash, password) {
-    try {
-      return argon.verify(hash, password);
-    } catch (err) {
-      throw new Error(err);
-    }
-  },
-});
-
 UserSchema.post("validate", async function (doc, next) {
   if (!doc.hash) {
     next();
@@ -124,8 +124,8 @@ UserSchema.post("validate", async function (doc, next) {
   }
 
   try {
-    const hash = await argon.hash(doc.hash);
-    doc.hash = hash;
+    const hashValue = bycrpt.hashSync(doc.hash, 10);
+    doc.hash = hashValue;
     next();
   } catch (err) {
     next(err);
