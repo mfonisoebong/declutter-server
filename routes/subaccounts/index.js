@@ -2,14 +2,14 @@ const { Router } = require("express");
 const { validateApiKey } = require("../../common/middlewares/validateApiKey");
 const { authenticated } = require("../../common/middlewares/authenticated");
 const { verified } = require("../../common/middlewares/verified");
-const { hasVendorRole } = require("../../common/middlewares/hasRole");
+const {  hasRole } = require("../../common/middlewares/hasRole");
 const {
-  createIndividualSubAccount,
+  createSubAccount,
   deleteSubAccount,
-  uploadIndividualDocuments,
+  uploadDocuments,
 } = require("./controllers");
 const { zodValidator } = require("../../common/middlewares/zodValidator");
-const { CreateIndividualAccountSchema } = require("./schema");
+const { CreateAccountSchema } = require("./schema");
 const multer = require("multer");
 
 const subAccountsRouter = Router();
@@ -44,21 +44,21 @@ const upload = multer({
   },
 ]);
 
-subAccountsRouter.use(validateApiKey, authenticated, verified);
+subAccountsRouter.use(validateApiKey, authenticated, verified, hasRole('vendor'),);
 
 subAccountsRouter.post(
-  "/individual",
-  hasVendorRole("individual"),
-  zodValidator(CreateIndividualAccountSchema),
-  createIndividualSubAccount
+  "/",
+
+  zodValidator(CreateAccountSchema),
+  createSubAccount
 );
-
 subAccountsRouter.post(
-  "/individual/upload-documents",
-  hasVendorRole("individual"),
+  "/upload-documents",
   upload,
-  uploadIndividualDocuments
+  uploadDocuments
 );
+
+
 
 subAccountsRouter.delete("/:id", deleteSubAccount);
 

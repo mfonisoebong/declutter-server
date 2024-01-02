@@ -25,7 +25,6 @@ const { productUserRouter } = require("./routes/products/user");
 const { reviewUserRouter } = require("./routes/product-reviews/user");
 const { cartRouter } = require("./routes/cart");
 const { categoriesRouter } = require("./routes/categories");
-const { paymentsRouter } = require("./routes/payments");
 const { webhooksRouter } = require("./routes/webhooks");
 const { homeRouter } = require("./routes/home");
 const { subAccountsRouter } = require("./routes/subaccounts");
@@ -72,9 +71,6 @@ app.use(apiRoutePrefixer("/dev"), devControlsRouter);
 
 // Test routes
 app.use(apiRoutePrefixer("/test"), testRouter);
-
-// Payments routes
-app.use(apiRoutePrefixer("/payments"), paymentsRouter);
 
 app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 

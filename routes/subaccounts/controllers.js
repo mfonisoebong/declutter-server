@@ -5,7 +5,7 @@ const {
 const { Stripe } = require("../../common/helpers/stripe");
 const { User } = require("../../schemas/user");
 
-const createIndividualSubAccount = async (req, res) => {
+const createSubAccount= async (req, res) => {
   try {
     const account = await Stripe.accounts.create({
       type: "custom",
@@ -49,6 +49,7 @@ const createIndividualSubAccount = async (req, res) => {
       company: {
         name: req.body.company.name,
         tax_id: req.body.company.taxId,
+
       },
       business_profile: {
         support_phone: req.body.buisnessProfile.supportPhone,
@@ -88,6 +89,8 @@ const createIndividualSubAccount = async (req, res) => {
     });
   }
 };
+
+
 const deleteSubAccount = async (req, res) => {
   try {
     const accountId = req.params.id;
@@ -105,7 +108,7 @@ const deleteSubAccount = async (req, res) => {
   }
 };
 
-const uploadIndividualDocuments = async (req, res) => {
+const uploadDocuments = async (req, res) => {
   try {
     if (!req.files.front || !req.files.back) {
       return failedResponse({
@@ -158,7 +161,7 @@ const uploadIndividualDocuments = async (req, res) => {
 };
 
 module.exports = {
-  createIndividualSubAccount,
+  createSubAccount,
   deleteSubAccount,
-  uploadIndividualDocuments,
+  uploadDocuments,
 };

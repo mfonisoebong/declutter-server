@@ -4,6 +4,7 @@ const {
   successResponse,
 } = require("../../common/helpers/httpResponse");
 const { Invoice } = require("../../schemas/invoice");
+const {Stripe} = require('../../common/helpers/stripe')
 
 const getTotalPrice = (cartItems) => {
   const prices = cartItems.map((item) => item.product.price * item.quantity);
@@ -129,7 +130,7 @@ const checkout = async (req, res) => {
     const cartItems = await CartItem.find({ user: req.user._id }).populate(
       "product",
       "name variants price",
-    );
+    )
 
     if (cartItems.length === 0) {
       return failedResponse({
@@ -137,14 +138,20 @@ const checkout = async (req, res) => {
         err: "Cart is empty",
       });
     }
-    const totalPrice = getTotalPrice(cartItems);
 
     const invoice = new Invoice({
       cartItems,
       user: req.user._id,
     });
-
     await invoice.save();
+    const paymentUrl = await generatePaymentUrl(cartItems, invoice);
+    return successResponse({
+      res,
+      data: {
+        paymentUrl,
+      }
+    })
+
   } catch (err) {
     return failedResponse({
       res,
@@ -152,6 +159,30 @@ const checkout = async (req, res) => {
     });
   }
 };
+
+const generatePaymentUrl= async(cartItems, invoice)=>{
+  const totalPrice = getTotalPrice(cartItems);
+  const session = await Stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items: cartItems.map(item=>({
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name: item.product.name,
+        },
+        unit_amount: item.product.price * 100,
+      },
+      quantity: item.quantity,
+    })),
+    metadata: {
+      invoice: invoice._id.toString(),
+    },
+    mode: 'payment',
+    success_url: 'http://localhost:3000/success',
+    cancel_url: 'http://localhost:3000/cancel',
+  });
+  return session.url;
+}
 
 module.exports = {
   addToCart,

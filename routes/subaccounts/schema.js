@@ -13,7 +13,9 @@ const CompanySchema = z.object({
   name: z.string().min(2).max(255),
   taxId: z.string().min(2).max(255),
   address: AddressSchema.optional().nullable(),
+
 });
+
 
 const IndividualSchema = z.object({
   firstName: z.string().min(2).max(255),
@@ -47,7 +49,7 @@ const BuisnessProfileSchema = z.object({
   supportUrl: z.string().min(2),
 });
 
-const CreateIndividualAccountSchema = z.object({
+const CreateAccountSchema = z.object({
   country: z.string().min(2),
   address: AddressSchema,
   individual: IndividualSchema,
@@ -56,6 +58,7 @@ const CreateIndividualAccountSchema = z.object({
   buisnessProfile: BuisnessProfileSchema,
 });
 
+
 module.exports = {
-  CreateIndividualAccountSchema,
+  CreateAccountSchema,
 };
