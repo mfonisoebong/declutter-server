@@ -2,14 +2,15 @@ const mongoose = require("mongoose");
 
 const OrderSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
     vendor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+
     invoice: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Invoice",
@@ -34,6 +35,7 @@ const OrderSchema = new mongoose.Schema(
     },
   }
 );
+
 
 const Order = mongoose.model("Order", OrderSchema);
 

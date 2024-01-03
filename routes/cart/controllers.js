@@ -129,8 +129,9 @@ const checkout = async (req, res) => {
   try {
     const cartItems = await CartItem.find({ user: req.user._id }).populate(
       "product",
-      "name variants price",
-    )
+      "name variants price vendor",
+    ).exec()
+
 
     if (cartItems.length === 0) {
       return failedResponse({
@@ -140,7 +141,7 @@ const checkout = async (req, res) => {
     }
 
     const invoice = new Invoice({
-      cartItems,
+      cartItems: JSON.parse(JSON.stringify(cartItems)),
       user: req.user._id,
     });
     await invoice.save();

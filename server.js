@@ -28,6 +28,8 @@ const { categoriesRouter } = require("./routes/categories");
 const { webhooksRouter } = require("./routes/webhooks");
 const { homeRouter } = require("./routes/home");
 const { subAccountsRouter } = require("./routes/subaccounts");
+const { orderRouter } = require("./routes/orders/user");
+const { vendorOrderRouter } = require("./routes/orders/vendor");
 
 const app = express();
 
@@ -66,6 +68,11 @@ app.use(apiRoutePrefixer("/cart"), cartRouter);
 
 app.use(apiRoutePrefixer("/categories"), categoriesRouter);
 
+
+app.use(apiRoutePrefixer("/orders"), orderRouter);
+app.use(apiRoutePrefixer("/vendor/orders"), vendorOrderRouter);
+
+
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
 
@@ -75,6 +82,8 @@ app.use(apiRoutePrefixer("/test"), testRouter);
 app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 
 app.use(apiRoutePrefixer("/webhooks"), webhooksRouter);
+
+
 
 app.listen(PORT, () => {
   console.log("Server running");

@@ -51,6 +51,7 @@ passport.use(
     if (!user) {
       return done(new Error("User not found"), null);
     }
+
     const paswordVerified = bycrpt.compareSync(password, user.hash);
 
     if (!paswordVerified) {

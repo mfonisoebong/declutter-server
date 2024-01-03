@@ -99,22 +99,22 @@ UserSchema.virtual("invoices", {
   foreignField: "user",
 });
 
-UserSchema.virtual("orders", {
-  ref: "Order",
-  localField: "_id",
-  foreignField: "user",
-});
-
-UserSchema.virtual("ordersPlaced", {
-  ref: "Order",
-  localField: "_id",
-  foreignField: "vendor",
-});
-
 UserSchema.virtual("bankAccounts", {
   ref: "BankAccount",
   localField: "_id",
   foreignField: "vendor",
+});
+
+UserSchema.virtual("vendorOrders", {
+  ref: "Order",
+  localField: "_id",
+  foreignField: "vendor",
+});
+
+UserSchema.virtual("orders", {
+  ref: "Order",
+  localField: "_id",
+  foreignField: "user",
 });
 
 UserSchema.post("validate", async function (doc, next) {
