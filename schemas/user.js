@@ -7,11 +7,11 @@ const UserSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: true,
+      default: null,
     },
     lastName: {
       type: String,
-      required: true,
+      default: null,
     },
     address: {
       type: String,
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     },
     authStrategy: {
       type: String,
-      enum: ["local", "google", "facebook"],
+      enum: ["local", "google"],
       default: "local",
     },
 

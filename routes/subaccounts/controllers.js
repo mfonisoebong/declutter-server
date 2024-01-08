@@ -5,25 +5,31 @@ const {
 const { Stripe } = require("../../common/helpers/stripe");
 const { User } = require("../../schemas/user");
 
-const createSubAccount= async (req, res) => {
+const createSubAccount = async (req, res) => {
   try {
     const account = await Stripe.accounts.create({
       type: "custom",
       country: req.body.country,
       email: req.user.email,
       business_type: "individual",
-
-      capabilities: {
-        transfers: {
-          requested: true,
-        },
-        card_payments: {
-          requested: true,
-        },
-        affirm_payments: {
-          requested: true,
-        },
-      },
+      requested_capabilities: ["transfers", "card_payments"],
+      // capabilities: {
+      //   transfers: {
+      //     requested: true,
+      //   },
+      //   card_payments: {
+      //     requested: true,
+      //   },
+      //   affirm_payments: {
+      //     requested: true,
+      //   },
+      //   crypto_transfers: {
+      //     requested: true,
+      //   },
+      //   legacy_payments: {
+      //     requested: true,
+      //   },
+      // },
       individual: {
         first_name: req.body.individual.firstName,
         last_name: req.body.individual.lastName,
@@ -49,7 +55,6 @@ const createSubAccount= async (req, res) => {
       company: {
         name: req.body.company.name,
         tax_id: req.body.company.taxId,
-
       },
       business_profile: {
         support_phone: req.body.buisnessProfile.supportPhone,
@@ -89,7 +94,6 @@ const createSubAccount= async (req, res) => {
     });
   }
 };
-
 
 const deleteSubAccount = async (req, res) => {
   try {

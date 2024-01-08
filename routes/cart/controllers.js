@@ -4,7 +4,7 @@ const {
   successResponse,
 } = require("../../common/helpers/httpResponse");
 const { Invoice } = require("../../schemas/invoice");
-const {Stripe} = require('../../common/helpers/stripe')
+const { Stripe } = require("../../common/helpers/stripe");
 
 const getTotalPrice = (cartItems) => {
   const prices = cartItems.map((item) => item.product.price * item.quantity);
@@ -127,11 +127,9 @@ const decrement = async (req, res) => {
 
 const checkout = async (req, res) => {
   try {
-    const cartItems = await CartItem.find({ user: req.user._id }).populate(
-      "product",
-      "name variants price vendor",
-    ).exec()
-
+    const cartItems = await CartItem.find({ user: req.user._id })
+      .populate("product", "name variants price vendor")
+      .exec();
 
     if (cartItems.length === 0) {
       return failedResponse({
@@ -150,10 +148,10 @@ const checkout = async (req, res) => {
       res,
       data: {
         paymentUrl,
-      }
-    })
-
+      },
+    });
   } catch (err) {
+    console.log(err);
     return failedResponse({
       res,
       err,
@@ -161,29 +159,32 @@ const checkout = async (req, res) => {
   }
 };
 
-const generatePaymentUrl= async(cartItems, invoice)=>{
-  const totalPrice = getTotalPrice(cartItems);
+const generatePaymentUrl = async (cartItems, invoice) => {
   const session = await Stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items: cartItems.map(item=>({
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.product.name,
+    payment_method_types: ["card"],
+    line_items: cartItems.map((item) => {
+      const unitAmount = item.product.price * 100;
+
+      return {
+        price_data: {
+          currency: "usd",
+          product_data: {
+            name: item.product.name,
+          },
+          unit_amount: unitAmount,
         },
-        unit_amount: item.product.price * 100,
-      },
-      quantity: item.quantity,
-    })),
+        quantity: item.quantity,
+      };
+    }),
     metadata: {
       invoice: invoice._id.toString(),
     },
-    mode: 'payment',
-    success_url: 'http://localhost:3000/success',
-    cancel_url: 'http://localhost:3000/cancel',
+    mode: "payment",
+    success_url: "http://localhost:3000/success",
+    cancel_url: "http://localhost:3000/cancel",
   });
   return session.url;
-}
+};
 
 module.exports = {
   addToCart,

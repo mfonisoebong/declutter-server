@@ -11,8 +11,28 @@ const {
   validateApiKey,
 } = require("../../../common/middlewares/validateApiKey");
 const { guest } = require("../../../common/middlewares/guest");
+const multer = require("multer");
+const bodyParser = require("body-parser");
 
 const signUpRouter = Router();
+
+const avatarUpload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype !== "image/jpeg" &&
+      file.mimetype !== "image/jpg" &&
+      file.mimetype !== "image/png"
+    ) {
+      return cb(new Error("Only jpeg and png files are allowed"));
+    }
+    cb(null, true);
+  },
+  limits: {
+    // 5MB
+    fileSize: 1024 * 1024 * 5,
+  },
+}).single("avatar");
 
 signUpRouter.get("/google", googleSignup, passportAuthenticate);
 signUpRouter.post(
@@ -27,6 +47,7 @@ signUpRouter.post(
   "/local/vendor",
   validateApiKey,
   guest,
+  avatarUpload,
   zodValidator(VendorSignUpSchema),
   vendorLocalSignup
 );

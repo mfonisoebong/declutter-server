@@ -30,6 +30,7 @@ const { homeRouter } = require("./routes/home");
 const { subAccountsRouter } = require("./routes/subaccounts");
 const { orderRouter } = require("./routes/orders/user");
 const { vendorOrderRouter } = require("./routes/orders/vendor");
+const { vendorDashboardRouter } = require("./routes/dashboard/vendor");
 
 const app = express();
 
@@ -82,6 +83,9 @@ app.use(apiRoutePrefixer("/test"), testRouter);
 app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 
 app.use(apiRoutePrefixer("/webhooks"), webhooksRouter);
+
+
+app.use(apiRoutePrefixer("/dashboard"), vendorDashboardRouter);
 
 
 
