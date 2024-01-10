@@ -5,10 +5,8 @@ const SignUpSchema = z
     email: z.string().email("Invalid email"),
     firstName: z.string().min("1", "First name is required"),
     lastName: z.string().min("1", "Last name is required"),
-    phone: z.object({
-      dialCode: z.string().min("1", "Phone number is required"),
-      number: z.string().min("1", "Phone dial code is required"),
-    }),
+    phone: z.string().min("1", "Phone number is required"),
+
     address: z.string().min("1", "Address is required"),
     password: z
       .string()
@@ -22,8 +20,7 @@ const SignUpSchema = z
 
 const VendorSignUpSchema = z.object({
   email: z.string().email("Invalid email"),
-  phoneNumber: z.string().min("1", "Phone number is required"),
-  phoneDialCode: z.string().min("1", "Phone dial code is required"),
+  phone: z.string().min("1", "Phone number is required"),
   password: z
     .string()
     .min(6, "Password must be upto 6 characters long")

@@ -38,23 +38,14 @@ const userLocalSignup = async (req, res, next) => {
   }
 };
 
-const vendorLocalSignup = async (req, res, next) => {
+const vendorLocalSignup = async (req, res) => {
   try {
-    const {
-      password,
-      confirmPassword,
-      phoneNumber,
-      phoneDialCode,
-      ...restData
-    } = req.body;
+    const { password, confirmPassword, ...restData } = req.body;
 
     const user = new User({
       ...restData,
       hash: password,
-      phone: {
-        dialCode: phoneDialCode,
-        number: phoneNumber,
-      },
+
       role: "vendor",
     });
     await user.save();

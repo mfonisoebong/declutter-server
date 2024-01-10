@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { EMAIL_REGEX } = require("../common/constants/regex");
-const { PhoneSchema } = require("./phone");
 const { sendVerification } = require("../common/utils/sendVerification");
 const bycrpt = require("bcryptjs");
 const UserSchema = new mongoose.Schema(
@@ -58,7 +57,7 @@ const UserSchema = new mongoose.Schema(
       default: null,
     },
     phone: {
-      type: PhoneSchema,
+      type: String,
       default: null,
     },
     verifiedAt: {
