@@ -3,9 +3,7 @@ const { User } = require("../../../schemas/user");
 const { failedResponse } = require("../../../common/helpers/httpResponse");
 const { serializeUser } = require("../../../common/helpers/serializeUser");
 const cloudinary = require("cloudinary").v2;
-const { v4: uuid4 } = require("uuid");
 const fs = require("fs");
-const axios = require("axios");
 const googleSignup = (req, res, next) => {
   req.session.authPage = "signup";
   req.session.role = req.query.role;
