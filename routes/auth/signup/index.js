@@ -12,12 +12,19 @@ const {
 } = require("../../../common/middlewares/validateApiKey");
 const { guest } = require("../../../common/middlewares/guest");
 const multer = require("multer");
-const bodyParser = require("body-parser");
+const path = require("path");
 
 const signUpRouter = Router();
 
 const avatarUpload = multer({
-  storage: multer.memoryStorage(),
+  storage: multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(null, path.join(__dirname, "../../../uploads"));
+    },
+    filename: (req, file, cb) => {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  }),
   fileFilter: (req, file, cb) => {
     if (
       file.mimetype !== "image/jpeg" &&
@@ -39,6 +46,7 @@ signUpRouter.post(
   "/local/user",
   validateApiKey,
   guest,
+  avatarUpload,
   zodValidator(SignUpSchema),
   userLocalSignup
 );
