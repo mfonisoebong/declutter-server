@@ -7,7 +7,9 @@ const { Product } = require("../../schemas/product");
 const getProducts = async (req, res) => {
   try {
     const categories = await Category.find().limit(10);
-    const topSellingProducts = await Product.find()
+    const topSellingProducts = await Product.find({
+      suspended: false,
+    })
       .select("name price sold variants vendor")
       .limit(5)
       .populate("vendor", "buisnessName")

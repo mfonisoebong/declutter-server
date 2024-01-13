@@ -6,7 +6,7 @@ const { authenticated } = require("../../../common/middlewares/authenticated");
 const { hasRole } = require("../../../common/middlewares/hasRole");
 const { zodValidator } = require("../../../common/middlewares/zodValidator");
 const { CreateProductSchema } = require("./schema");
-const { createProduct } = require("./controller");
+const { createProduct, getProducts } = require("./controller");
 const { verified } = require("../../../common/middlewares/verified");
 const {
   hasStripeAccount,
@@ -23,6 +23,7 @@ productVendorRouter.use(
 );
 
 productVendorRouter.post("/", zodValidator(CreateProductSchema), createProduct);
+productVendorRouter.get("/", getProducts);
 
 module.exports = {
   productVendorRouter,

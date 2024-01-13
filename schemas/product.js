@@ -35,6 +35,10 @@ const ProductSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
+    image: {
+      required: true,
+      type: String,
+    },
     variants: {
       type: [VariantSchema],
       required: true,
@@ -49,10 +53,9 @@ const ProductSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    sold: {
-      type: Number,
-      default: 0,
-      min: 0,
+    suspended: {
+      type: Boolean,
+      default: false,
     },
   },
   {

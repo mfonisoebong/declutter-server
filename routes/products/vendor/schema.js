@@ -8,6 +8,8 @@ const VariantSchema = z.object({
 
 const CreateProductSchema = z.object({
   name: z.string().min(1).max(255),
+  image: z.string().min(1).max(100),
+
   price: z.number().min(0),
   category: z.string().min(1),
   sizes: z.array(z.string().min(1).max(100)),

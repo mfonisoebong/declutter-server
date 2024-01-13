@@ -2,15 +2,29 @@ const {
   failedResponse,
   successResponse,
 } = require("../../../common/helpers/httpResponse");
-const { User } = require("../../../schemas/user");
+const { getPagination } = require("../../../common/utils/getPagination");
 const { Order } = require("../../../schemas/order");
-const getOrders = async (req, res) => {
-  try {
-    const user = await User.findById(req.user._id).populate("orders");
 
+const getOrders = async (req, res) => {
+  const page = parseInt(req.query?.page) || 1;
+  const limit = parseInt(req.query?.limit) || 20;
+  try {
+    const total = await Order.countDocuments({ user: req.user._id });
+    const orders = await Order.find({
+      user: req.user._id,
+    })
+      .select("invoice status deliveredAt")
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const pagination = getPagination(page, limit, total);
+
+    const ordersData = {
+      ...pagination,
+      data: orders,
+    };
     return successResponse({
       res,
-      data: user.orders,
+      data: ordersData,
     });
   } catch (err) {
     return failedResponse({

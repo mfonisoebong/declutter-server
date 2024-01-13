@@ -4,6 +4,7 @@ const {
 } = require("../../../common/helpers/httpResponse");
 const { User } = require("../../../schemas/user");
 const { Order } = require("../../../schemas/order");
+const { getPagination } = require("../../../common/utils/getPagination");
 
 const validateOrder = async (req, res, next) => {
   try {
@@ -29,12 +30,29 @@ const validateOrder = async (req, res, next) => {
   }
 };
 const getVendorOrders = async (req, res) => {
+  const page = parseInt(req.query?.page) || 1;
+  const limit = parseInt(req.query?.limit) || 20;
   try {
-    const user = await User.findById(req.user._id).populate("vendorOrders");
+    const total = await Order.countDocuments({ vendor: req.user._id });
+    const orders = await Order.find({
+      vendor: req.user._id,
+    })
+      .populate({
+        path: "user",
+        select: "firstName lastName email buisnessName",
+      })
 
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const pagination = getPagination(page, limit, total);
+
+    const ordersData = {
+      ...pagination,
+      data: orders,
+    };
     return successResponse({
       res,
-      data: user.vendorOrders,
+      data: ordersData,
     });
   } catch (err) {
     return failedResponse({
