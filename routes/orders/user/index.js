@@ -1,19 +1,18 @@
-const {Router}= require('express')
-const { validateApiKey } = require("../../../common/middlewares/validateApiKey");
+const { Router } = require("express");
+const {
+  validateApiKey,
+} = require("../../../common/middlewares/validateApiKey");
 const { authenticated } = require("../../../common/middlewares/authenticated");
 const { verified } = require("../../../common/middlewares/verified");
-const { hasRole } = require("../../../common/middlewares/hasRole");
-const { getOrders } = require("./controllers");
+const { getOrders, getOrder } = require("./controllers");
 
-const orderRouter = Router()
+const orderRouter = Router();
 
-orderRouter.use(validateApiKey, authenticated, verified)
+orderRouter.use(validateApiKey, authenticated, verified);
 
+orderRouter.get("/", getOrders);
+orderRouter.get("/:id", getOrder);
 
-orderRouter.get('/', getOrders)
-
-
-
-module.exports= {
-    orderRouter
-}
+module.exports = {
+  orderRouter,
+};

@@ -1,24 +1,123 @@
-const { failedResponse, successResponse } = require("../../../common/helpers/httpResponse");
+const {
+  failedResponse,
+  successResponse,
+} = require("../../../common/helpers/httpResponse");
 const { User } = require("../../../schemas/user");
-const getVendorOrders= async (req, res) => {
+const { Order } = require("../../../schemas/order");
 
-  try{
-    const user= await User.findById(req.user._id).populate('vendorOrders')
+const validateOrder = async (req, res, next) => {
+  try {
+    const order = await Order.findOne({
+      _id: req.params.id,
+      vendor: req.user._id,
+    });
+    req.order = order;
+    if (!order) {
+      return failedResponse({
+        res,
+        err: "Order not found",
+        status: 404,
+      });
+    }
 
-    return successResponse({
-      res,
-      data: user.vendorOrders
-    })
-
+    return next();
   } catch (err) {
     return failedResponse({
       res,
-      err
-    })
+      err,
+    });
   }
+};
+const getVendorOrders = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id).populate("vendorOrders");
 
-}
+    return successResponse({
+      res,
+      data: user.vendorOrders,
+    });
+  } catch (err) {
+    return failedResponse({
+      res,
+      err,
+    });
+  }
+};
+const confirmDelivery = async (req, res) => {
+  try {
+    if (req.order.status === "delivered") {
+      return failedResponse({
+        res,
+        message: "Order already delivered",
+        err: "Order already delivered",
+        status: 403,
+      });
+    }
+
+    req.order.status = "delivered";
+    req.order.deliveredAt = Date.now();
+    await req.order.save();
+    return successResponse({
+      res,
+      message: "Order marked as delivered",
+    });
+  } catch (err) {
+    return failedResponse({
+      res,
+      err,
+    });
+  }
+};
+
+const cancelOrder = async (req, res) => {
+  try {
+    if (req.order.status === "cancelled") {
+      return failedResponse({
+        res,
+        message: "Order already cancelled",
+        err: "Order already cancelled",
+        status: 403,
+      });
+    }
+
+    req.order.status = "cancelled";
+    await req.order.save();
+    return successResponse({
+      res,
+      message: "Order cancelled",
+    });
+  } catch (err) {
+    return failedResponse({
+      res,
+      err,
+    });
+  }
+};
+
+const getOrder = async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id)
+      .populate({
+        path: "user",
+        select: "firstName lastName email phone address buisnessName",
+      })
+      .populate("invoice");
+    return successResponse({
+      res,
+      data: order,
+    });
+  } catch (err) {
+    return failedResponse({
+      res,
+      err,
+    });
+  }
+};
 
 module.exports = {
-  getVendorOrders
-}
+  getVendorOrders,
+  confirmDelivery,
+  cancelOrder,
+  validateOrder,
+  getOrder,
+};

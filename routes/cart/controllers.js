@@ -144,6 +144,11 @@ const checkout = async (req, res) => {
     });
     await invoice.save();
     const paymentUrl = await generatePaymentUrl(cartItems, invoice);
+
+    await CartItem.deleteMany({
+      user: req.user._id,
+    });
+
     return successResponse({
       res,
       data: {

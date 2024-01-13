@@ -1,5 +1,12 @@
 const { Router } = require("express");
-const { getOverview } = require("./controllers");
+const {
+  getOverview,
+  getSalesAnalysis,
+  getTopSales,
+  recentOrders,
+  getBalance,
+  getOrdersStatus,
+} = require("./controllers");
 const {
   validateApiKey,
 } = require("../../../common/middlewares/validateApiKey");
@@ -17,5 +24,10 @@ vendorDashboardRouter.use(
 );
 
 vendorDashboardRouter.get("/overview", getOverview);
+vendorDashboardRouter.get("/sales-analysis", getSalesAnalysis);
+vendorDashboardRouter.get("/top-sales", getTopSales);
+vendorDashboardRouter.get("/recent-orders", recentOrders);
+vendorDashboardRouter.get("/balance", getBalance);
+vendorDashboardRouter.get("/orders", getOrdersStatus);
 
 module.exports = { vendorDashboardRouter };

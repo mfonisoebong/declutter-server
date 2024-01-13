@@ -48,16 +48,6 @@ const recieveWebhook = async (req, res) => {
           },
         });
 
-        const confirmPaymentIntent = await Stripe.paymentIntents.confirm(
-          transfer.id,
-          {
-            payment_method: event.data.object.payment_method,
-            return_url: "https://www.example.com",
-          }
-        );
-
-        console.log(confirmPaymentIntent);
-
         const order = new Order({
           user: invoice.user,
           vendor: item.product.vendor,

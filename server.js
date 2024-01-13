@@ -69,10 +69,8 @@ app.use(apiRoutePrefixer("/cart"), cartRouter);
 
 app.use(apiRoutePrefixer("/categories"), categoriesRouter);
 
-
 app.use(apiRoutePrefixer("/orders"), orderRouter);
 app.use(apiRoutePrefixer("/vendor/orders"), vendorOrderRouter);
-
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
@@ -84,10 +82,7 @@ app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 
 app.use(apiRoutePrefixer("/webhooks"), webhooksRouter);
 
-
-app.use(apiRoutePrefixer("/dashboard"), vendorDashboardRouter);
-
-
+app.use(apiRoutePrefixer("/dashboard/vendor"), vendorDashboardRouter);
 
 app.listen(PORT, () => {
   console.log("Server running");
