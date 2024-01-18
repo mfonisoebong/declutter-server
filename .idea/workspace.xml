@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2638e132-0d03-49aa-b422-7b5ad0cc343a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/home/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/home/controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/products/vendor/controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/products/vendor/controller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/products/vendor/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/products/vendor/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/products/vendor/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/products/vendor/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schemas/product.js" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/product.js" afterDir="false" />
-    </list>
+    <list default="true" id="2638e132-0d03-49aa-b422-7b5ad0cc343a" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,31 +25,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "javascript.nodejs.core.library.configured.version": "20.9.0",
-    "javascript.nodejs.core.library.typings.version": "20.9.5",
-    "last_opened_file_path": "/home/mfoniso/Documents/projects/declutter-server",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/mfoniso/.nvm/versions/node/v20.9.0/bin/node",
-    "nodejs_package_manager_path": "pnpm",
-    "prettierjs.PrettierConfiguration.Package": "/home/mfoniso/.nvm/versions/node/v20.9.0/lib/node_modules/prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "/home/mfoniso/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;javascript.nodejs.core.library.configured.version&quot;: &quot;20.9.0&quot;,
+    &quot;javascript.nodejs.core.library.typings.version&quot;: &quot;20.9.5&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/mfoniso/Documents/projects/declutter-server&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/mfoniso/.nvm/versions/node/v20.9.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;/home/mfoniso/.nvm/versions/node/v20.9.0/lib/node_modules/prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/mfoniso/.local/share/JetBrains/Toolbox/apps/webstorm/plugins/javascript-impl/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mongo"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mongo&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/routes/dashboard/vendor" />
@@ -92,6 +85,7 @@
       <workItem from="1705071985021" duration="6227000" />
       <workItem from="1705176765271" duration="7224000" />
       <workItem from="1705186319750" duration="3007000" />
+      <workItem from="1705316450908" duration="13000" />
     </task>
     <servers />
   </component>

@@ -14,6 +14,7 @@ const addDefaultMiddlewares = (app) => {
         "http://localhost:5174",
       ],
       methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+      credentials: true,
     })
   );
   app.use("/public", express.static("public"));
