@@ -31,6 +31,10 @@ const { subAccountsRouter } = require("./routes/subaccounts");
 const { orderRouter } = require("./routes/orders/user");
 const { vendorOrderRouter } = require("./routes/orders/vendor");
 const { vendorDashboardRouter } = require("./routes/dashboard/vendor");
+const { adminDashboardRouter } = require("./routes/dashboard/admin");
+const { adminOrderRouter } = require("./routes/orders/admin");
+const { productAdminRouter } = require("./routes/products/admin");
+const { usersAdminRouter } = require("./routes/users");
 
 const app = express();
 
@@ -59,7 +63,8 @@ app.use(apiRoutePrefixer("/contact-us"), contactUsRouter);
 
 // Product routes
 app.use(apiRoutePrefixer("/products/vendor"), productVendorRouter);
-app.use(apiRoutePrefixer("/products/user"), productUserRouter);
+app.use(apiRoutePrefixer("/products"), productUserRouter);
+app.use(apiRoutePrefixer("/products/admin"), productAdminRouter);
 
 // Product review routes
 app.use(apiRoutePrefixer("/product-reviews/user"), reviewUserRouter);
@@ -71,6 +76,7 @@ app.use(apiRoutePrefixer("/categories"), categoriesRouter);
 
 app.use(apiRoutePrefixer("/orders"), orderRouter);
 app.use(apiRoutePrefixer("/vendor/orders"), vendorOrderRouter);
+app.use(apiRoutePrefixer("/admin/orders"), adminOrderRouter);
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
@@ -83,6 +89,10 @@ app.use(apiRoutePrefixer("/subaccounts"), subAccountsRouter);
 app.use(apiRoutePrefixer("/webhooks"), webhooksRouter);
 
 app.use(apiRoutePrefixer("/dashboard/vendor"), vendorDashboardRouter);
+app.use(apiRoutePrefixer("/dashboard/admin"), adminDashboardRouter);
+
+// User routes
+app.use(apiRoutePrefixer("/users/admin"), usersAdminRouter);
 
 app.listen(PORT, () => {
   console.log("Server running");

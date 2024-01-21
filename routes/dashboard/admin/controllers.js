@@ -6,59 +6,48 @@ const { Stripe } = require("../../../common/helpers/stripe");
 const { Order } = require("../../../schemas/order");
 const { Product } = require("../../../schemas/product");
 const { MONTHS } = require("../../../common/constants/months");
+const { User } = require("../../../schemas/user");
 const { salesAnalysis } = require("../utils/salesAnalysis");
 const { topSales } = require("../utils/topSales");
-
 const getOverview = async (req, res) => {
   try {
-    const balance = await Stripe.balance.retrieve({
-      stripeAccount: req.user.stripeAccountId,
-    });
-    const balanceAvailable = balance.available[0].amount;
-    const vendorOrders = await Order.find({
-      vendor: req.user._id,
+    const orders = await Order.find({
       status: "delivered",
     }).populate("invoice");
 
-    const cartItems = vendorOrders.flatMap((order) => order.invoice.cartItems);
+    const cartItems = orders.flatMap((order) => order.invoice.cartItems);
 
     const amounts = cartItems.map((item) => item.product.price * item.quantity);
 
     const totalSales = amounts.reduce((acc, curr) => acc + curr, 0);
 
-    const products = await Product.find({ vendor: req.user._id });
+    const pendingOrdersCount = await Order.countDocuments({
+      status: "pending",
+    });
+    const usersCount = await User.countDocuments({});
+    const earnings = totalSales * 0.1;
 
     return successResponse({
       res,
       data: {
-        balanceAvailable,
         totalSales,
-        itemsSold: cartItems.length,
-        totalProducts: products.length,
+        pendingOrdersCount,
+        usersCount,
+        earnings,
       },
     });
-  } catch (err) {
-    return failedResponse({
-      res,
-      err,
-    });
-  }
+  } catch (err) {}
 };
 
 const getSalesAnalysis = async (req, res) => {
   try {
     const orders = await Order.find({
-      vendor: req.user._id,
       status: "delivered",
     }).populate("invoice");
-    const cartItems = orders.flatMap((order) => order.invoice.cartItems);
-    const amounts = cartItems.map((item) => item.product.price * item.quantity);
-    const totalSales = amounts.reduce((acc, curr) => acc + curr, 0);
     const monthsData = salesAnalysis(orders);
     return successResponse({
       res,
       data: {
-        totalSales,
         monthsData,
       },
     });
@@ -69,20 +58,16 @@ const getSalesAnalysis = async (req, res) => {
     });
   }
 };
-
 const getOrdersStatus = async (req, res) => {
   try {
     const pending = await Order.countDocuments({
       status: "pending",
-      vendor: req.user._id,
     });
     const cancelled = await Order.countDocuments({
       status: "cancelled",
-      vendor: req.user._id,
     });
     const delivered = await Order.countDocuments({
       status: "delivered",
-      vendor: req.user._id,
     });
 
     return successResponse({
@@ -104,7 +89,6 @@ const getOrdersStatus = async (req, res) => {
 const getTopSales = async (req, res) => {
   try {
     const orders = await Order.find({
-      vendor: req.user._id,
       status: "delivered",
     }).populate("invoice");
     const productsData = topSales(orders);
@@ -124,9 +108,7 @@ const getTopSales = async (req, res) => {
 
 const recentOrders = async (req, res) => {
   try {
-    const orders = await Order.find({
-      vendor: req.user._id,
-    })
+    const orders = await Order.find({})
       .sort({
         createdAt: "desc",
       })
@@ -145,41 +127,10 @@ const recentOrders = async (req, res) => {
   }
 };
 
-const getBalance = async (req, res) => {
-  try {
-    //   Get payouts from stripe
-    const fiveDaysAgo = Math.floor(Date.now() / 1000) - 5 * 24 * 60 * 60;
-    const charges = await Stripe.charges.list({
-      limit: 10,
-      created: {
-        gte: fiveDaysAgo,
-      },
-      stripeAccount: req.user.stripeAccount,
-    });
-    const balance = await Stripe.balance.retrieve({
-      stripeAccount: req.user.stripeAccountId,
-    });
-    const balanceAvailable = balance.available[0].amount;
-    return successResponse({
-      res,
-      data: {
-        recentTransactions: charges.data,
-        balanceAvailable,
-      },
-    });
-  } catch (err) {
-    return failedResponse({
-      res,
-      err,
-    });
-  }
-};
-
 module.exports = {
   getOverview,
   getSalesAnalysis,
+  getOrdersStatus,
   getTopSales,
   recentOrders,
-  getBalance,
-  getOrdersStatus,
 };

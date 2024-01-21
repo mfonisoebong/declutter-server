@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const { EMAIL_REGEX } = require("../common/constants/regex");
 const { sendVerification } = require("../common/utils/sendVerification");
 const bycrpt = require("bcryptjs");
+const { Product } = require("./product");
 const UserSchema = new mongoose.Schema(
   {
     firstName: {
@@ -11,6 +12,11 @@ const UserSchema = new mongoose.Schema(
     lastName: {
       type: String,
       default: null,
+    },
+    status: {
+      type: String,
+      enum: ["active", "suspended"],
+      default: "active",
     },
     address: {
       type: String,
@@ -73,7 +79,7 @@ const UserSchema = new mongoose.Schema(
     toObject: {
       virtuals: true,
     },
-  }
+  },
 );
 
 UserSchema.virtual("fullName").get(function () {
@@ -145,6 +151,13 @@ UserSchema.post("save", async function (doc) {
   } catch (err) {
     console.log(err);
   }
+});
+
+UserSchema.pre("deleteMany", async function (next) {
+  await Product.deleteMany({
+    vendor: { $in: this._conditions._id.$in },
+  }).exec();
+  next();
 });
 
 const User = mongoose.model("User", UserSchema);
