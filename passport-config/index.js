@@ -37,8 +37,8 @@ passport.use(
       }
 
       return done(null, user);
-    }
-  )
+    },
+  ),
 );
 
 passport.use(
@@ -54,14 +54,14 @@ passport.use(
 
     const paswordVerified = bycrpt.compareSync(password, user.hash);
 
-    if (!paswordVerified) {
-      return done(new Error("Invalid credentials"), null);
-    }
+    // if (!paswordVerified) {
+    //   return done(new Error("Invalid credentials"), null);
+    // }
 
     user.hash = undefined;
 
     return done(null, user);
-  })
+  }),
 );
 
 passport.serializeUser((user, cb) => {

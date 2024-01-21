@@ -77,8 +77,34 @@ const deleteUsers = async (req, res) => {
   }
 };
 
+const changeUserStatus = async (req, res) => {
+  try {
+    await User.updateOne(
+      {
+        _id: {
+          $in: req.body.ids,
+        },
+      },
+      {
+        status: req.body.status,
+      },
+    );
+
+    return successResponse({
+      res,
+      message: "User status changed successfully",
+    });
+  } catch (err) {
+    return failedResponse({
+      res,
+      err,
+    });
+  }
+};
+
 module.exports = {
   getUsers,
   getUsersOverview,
   deleteUsers,
+  changeUserStatus,
 };

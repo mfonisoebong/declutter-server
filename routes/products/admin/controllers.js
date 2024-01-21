@@ -7,7 +7,6 @@ const {
 const getProducts = async (req, res) => {
   const page = parseInt(req.query?.page) || 1;
   const limit = parseInt(req.query?.limit) || 20;
-
   try {
     const total = await Product.countDocuments({});
     const products = await Product.find({})
@@ -25,6 +24,7 @@ const getProducts = async (req, res) => {
       data: productsData,
     });
   } catch (err) {
+    console.log(err);
     return failedResponse({
       res,
       err,

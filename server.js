@@ -62,9 +62,9 @@ app.use(apiRoutePrefixer("/auth/signout"), signoutRouter);
 app.use(apiRoutePrefixer("/contact-us"), contactUsRouter);
 
 // Product routes
-app.use(apiRoutePrefixer("/products/vendor"), productVendorRouter);
+app.use(apiRoutePrefixer("/admin/products"), productAdminRouter);
+app.use(apiRoutePrefixer("/vendor/products"), productVendorRouter);
 app.use(apiRoutePrefixer("/products"), productUserRouter);
-app.use(apiRoutePrefixer("/products/admin"), productAdminRouter);
 
 // Product review routes
 app.use(apiRoutePrefixer("/product-reviews/user"), reviewUserRouter);
@@ -74,9 +74,9 @@ app.use(apiRoutePrefixer("/cart"), cartRouter);
 
 app.use(apiRoutePrefixer("/categories"), categoriesRouter);
 
-app.use(apiRoutePrefixer("/orders"), orderRouter);
 app.use(apiRoutePrefixer("/vendor/orders"), vendorOrderRouter);
 app.use(apiRoutePrefixer("/admin/orders"), adminOrderRouter);
+app.use(apiRoutePrefixer("/orders"), orderRouter);
 
 // Dev routes
 app.use(apiRoutePrefixer("/dev"), devControlsRouter);
@@ -92,7 +92,7 @@ app.use(apiRoutePrefixer("/dashboard/vendor"), vendorDashboardRouter);
 app.use(apiRoutePrefixer("/dashboard/admin"), adminDashboardRouter);
 
 // User routes
-app.use(apiRoutePrefixer("/users/admin"), usersAdminRouter);
+app.use(apiRoutePrefixer("/admin/users"), usersAdminRouter);
 
 app.listen(PORT, () => {
   console.log("Server running");

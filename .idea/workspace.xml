@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2638e132-0d03-49aa-b422-7b5ad0cc343a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/dashboard/vendor/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/dashboard/vendor/controllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/schemas/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/passport-config/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/passport-config/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/auth/signup/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/auth/signup/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/products/admin/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/products/admin/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users/controllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users/controllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/users/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/users/schema.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +36,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Node.js.controllers.js.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -95,7 +100,7 @@
       <workItem from="1705762502986" duration="20000" />
       <workItem from="1705830989711" duration="2514000" />
       <workItem from="1705851923524" duration="311000" />
-      <workItem from="1705852309501" duration="2046000" />
+      <workItem from="1705852309501" duration="3765000" />
     </task>
     <servers />
   </component>
