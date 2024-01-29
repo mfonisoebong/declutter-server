@@ -1,6 +1,9 @@
 const passport = require("passport");
 const { User } = require("../../../schemas/user");
-const { failedResponse } = require("../../../common/helpers/httpResponse");
+const {
+  failedResponse,
+  successResponse,
+} = require("../../../common/helpers/httpResponse");
 const { serializeUser } = require("../../../common/helpers/serializeUser");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
@@ -41,11 +44,11 @@ const userLocalSignup = async (req, res, next) => {
 
     const token = serializeUser(user);
     user.hash = undefined;
-    return res
-      .cookie("jwt_token", token, {
-        maxAge: 60000 * 60 * 24,
-      })
-      .json(user);
+    return successResponse({
+      res,
+      message: "success",
+      data: { user, token },
+    });
   } catch (err) {
     return failedResponse({
       res,
@@ -75,13 +78,12 @@ const vendorLocalSignup = async (req, res) => {
 
     const token = serializeUser(user);
     user.hash = undefined;
-    return res
-      .cookie("jwt_token", token, {
-        maxAge: 60000 * 60 * 24,
-      })
-      .json(user);
+    return successResponse({
+      res,
+      message: "success",
+      data: { user, token },
+    });
   } catch (err) {
-    console.log(err);
     return failedResponse({
       res,
       err,

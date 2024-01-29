@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../../schemas/user");
 
 const deserializeUser = async (req) => {
-  const token = req.cookies.jwt_token ?? "";
+  const token = req.get("Authorization")?.split(" ")[1];
 
   const body = jwt.decode(token);
 
