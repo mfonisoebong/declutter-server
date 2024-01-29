@@ -14,6 +14,7 @@ const authenticated = async (req, res, next) => {
       status: 401,
     });
   } catch (err) {
+    console.log(err)
     return failedResponse({
       res,
       err,
