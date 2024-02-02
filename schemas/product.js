@@ -19,10 +19,29 @@ const VariantSchema = new mongoose.Schema({
     required: true,
   },
 });
+const ShipmentSchema = new mongoose.Schema({
+  method: {
+    type: String,
+    enum: ["local", "express"],
+    required: true,
+  },
+  processingTime: {
+    type: String,
+    required: true,
+  },
+  region: {
+    type: String,
+    required: true,
+  },
+});
 
 const ProductSchema = new mongoose.Schema(
   {
     name: {
+      type: String,
+      required: true,
+    },
+    description: {
       type: String,
       required: true,
     },
@@ -53,6 +72,10 @@ const ProductSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    shipment: {
+      type: ShipmentSchema,
+      required: true,
+    },
     suspended: {
       type: Boolean,
       default: false,
@@ -65,7 +88,7 @@ const ProductSchema = new mongoose.Schema(
     toJSON: {
       virtuals: true,
     },
-  },
+  }
 );
 
 ProductSchema.virtual("reviews", {
