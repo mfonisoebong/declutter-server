@@ -1,6 +1,7 @@
 const { failedResponse } = require("../helpers/httpResponse");
 
 function hasStripeAccount(req, res, next) {
+  return next();
   if (!req.user.stripeAccountId) {
     return failedResponse({
       res,
