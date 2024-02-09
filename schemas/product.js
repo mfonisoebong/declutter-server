@@ -62,9 +62,8 @@ const ProductSchema = new mongoose.Schema(
       type: [VariantSchema],
       required: true,
     },
-    category: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Category",
+    categories: {
+      type: Array,
       required: true,
     },
     vendor: {

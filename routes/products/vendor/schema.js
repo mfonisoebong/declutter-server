@@ -17,7 +17,7 @@ const CreateProductSchema = z.object({
   image: z.string().min(1).max(100),
   description: z.string().min(1),
   price: z.number().min(0),
-  category: z.string().min(1),
+  categories: z.array(z.string()).min(1),
   sizes: z.array(z.string().min(1).max(100)),
   variants: z.array(VariantSchema),
   shipment: ShipmentSchema,
